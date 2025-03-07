@@ -10,8 +10,8 @@ target_include_directories(arcade PRIVATE
 
 # Lier avec les bibliothèques dynamiques
 target_link_libraries(arcade PRIVATE
-    arcadeAllegro
-    arcadeSdl
-    arcadeNcurses
+    arcade_allegro5
+    arcade_sdl2
+    arcade_ncurses
     dl
 )

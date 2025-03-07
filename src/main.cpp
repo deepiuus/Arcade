@@ -20,11 +20,11 @@ std::string getPath(TGraphics type)
 {
     switch (type) {
         case TGraphics::NCURSES:
-            return "./lib/libarcadeNcurses.so";
+            return "./lib/libarcade_ncurses.so";
         case TGraphics::SDL:
-            return "./lib/libarcadeSdl.so";
+            return "./lib/libarcade_sdl2.so";
         case TGraphics::ALLEGRO:
-            return "./lib/libarcadeAllegro.so";
+            return "./lib/libarcade_allegro5.so";
         default:
             return "";
     }
