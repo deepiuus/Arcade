@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Documentation</title>
+    <link rel="stylesheet" href="doc.css">
+</head>
+<body>
+    <header>
+        <h1>Arcade Project Documentation</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#build">Building the Project</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#graphics">Graphics Libraries</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#extend">Extending the Project</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Project Overview</h2>
+            <p>
+                The Arcade project is a gaming platform that allows playing different games with different graphic libraries.
+                Its modular architecture enables dynamic switching between games and graphic renderers during runtime.
+            </p>
+        </section>
+
+        <section id="architecture">
+            <h2>Architecture</h2>
+            <p>
+                The project uses a plugin-based architecture with dynamic libraries:
+            </p>
+            <ul>
+                <li><strong>Core</strong>: Manages game and graphics libraries</li>
+                <li><strong>Graphics Libraries</strong>: SFML, SDL2, NCurses</li>
+                <li><strong>Game Libraries</strong>: Snake, Nibbler, Menu</li>
+            </ul>
+            <div class="diagram">
+                <img src="archi.png" alt="Architecture diagram" class="placeholder">
+            </div>
+            <h3>Key Components</h3>
+            <ul>
+                <li><strong>LibraryManager</strong>: Handles loading and switching between graphic libraries</li>
+                <li><strong>GameManager</strong>: Handles loading and switching between game libraries</li>
+                <li><strong>IGraphics</strong>: Interface for all graphic libraries</li>
+                <li><strong>IGames</strong>: Interface for all game implementations</li>
+            </ul>
+        </section>
+
+        <section id="build">
+            <h2>Building the Project</h2>
+            <p>The project uses CMake for building. Follow these steps:</p>
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>C++ compiler with C++17 support</li>
+                <li>CMake 3.10 or higher</li>
+                <li>SFML, SDL2, and NCurses development libraries</li>
+            </ul>
+            <h3>Build Commands</h3>
+            <pre><code>mkdir -p build
+cd build
+cmake ..
+make</code></pre>
+            
+            <p>This will generate the arcade executable and library files in the project directory.</p>
+        </section>
+        
+        <section id="usage">
+            <h2>Usage</h2>
+            <h3>Starting the Application</h3>
+            <pre><code>./arcade &lt;graphics_library_path&gt;</code></pre>
+            <p>Example: <code>./arcade lib/arcade_sfml.so</code></p>
+            
+            <h3>Controls</h3>
+            <table>
+                <tr>
+                    <th>Key</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Arrow keys</td>
+                    <td>Move character/selection</td>
+                </tr>
+                <tr>
+                    <td>Space</td>
+                    <td>Select/Restart game</td>
+                </tr>
+                <tr>
+                    <td>Esc</td>
+                    <td>Exit</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="graphics">
+            <h2>Graphics Libraries</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>SFML</h3>
+                    <p>A comprehensive multimedia library with rich graphical features.</p>
+                    <p><strong>File:</strong> lib/arcade_sfml.so</p>
+                </div>
+                <div class="card">
+                    <h3>SDL2</h3>
+                    <p>Simple DirectMedia Layer library for low-level access to audio, keyboard, mouse, joystick, and graphics.</p>
+                    <p><strong>File:</strong> lib/arcade_sdl2.so</p>
+                </div>
+                <div class="card">
+                    <h3>NCurses</h3>
+                    <p>Text-based interface library for terminal-based visualization.</p>
+                    <p><strong>File:</strong> lib/arcade_ncurses.so</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="games">
+            <h2>Available Games</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Snake</h3>
+                    <p>Classic snake game where you control a snake that grows as it eats food while avoiding walls and itself.</p>
+                    <p><strong>File:</strong> lib/arcade_snake.so</p>
+                </div>
+                <div class="card">
+                    <h3>Nibbler</h3>
+                    <p>A snake game variant with maze navigation, where you guide a snake through a predefined map.</p>
+                    <p><strong>File:</strong> lib/arcade_nibbler.so</p>
+                    <p><strong>Map:</strong> lib/Games/nibbler/map.txt</p>
+                </div>
+                <div class="card">
+                    <h3>Menu</h3>
+                    <p>Game selection interface to choose between available games.</p>
+                    <p><strong>File:</strong> lib/arcade_menu.so</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="extend">
+            <h2>Extending the Project</h2>
+            <h3>Adding a New Graphics Library</h3>
+            <p>To create a new graphics library:</p>
+            <ol>
+                <li>Create a new class that implements the IGraphics interface</li>
+                <li>Implement all required methods (Init, getKey, Display, etc.)</li>
+                <li>Create an entryPoint function that returns a new instance of your class</li>
+                <li>Build as a shared library (.so file)</li>
+            </ol>
+            
+            <h3>Adding a New Game</h3>
+            <p>To create a new game:</p>
+            <ol>
+                <li>Create a new class that implements the IGames interface</li>
+                <li>Implement all required methods (setKey, getDisplay, getSound, etc.)</li>
+                <li>Create an entryPoint function that returns a new instance of your game</li>
+                <li>Build as a shared library (.so file)</li>
+            </ol>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Arcade Project Documentation - EPITECH Project 2025</p>
+    </footer>
+</body>
+</html>
